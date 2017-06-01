@@ -1,0 +1,15 @@
+<h1 class='title' id='title'>Hello world!</h1>
+<style>
+  .smaller{
+    font-size: 10px;
+  }
+</style>
+<script>
+  function lengthCheck() {
+    var titleElement = document.getElementById("title");
+    if (titleElement.innerHTML.length > 100) return titleElement.className += " smaller";
+    return alert(titleElement.innerHTML.length);
+  }
+
+  lengthCheck()
+</script>

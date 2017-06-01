@@ -1,0 +1,57 @@
+<script>
+  // cicle
+  function sumTo(n) {
+    var res = n;
+    for (var i = 1; i < n; i++){
+      res += n - i;
+    }
+    alert(res);
+  }
+
+  //recursion
+
+  function sumTo1(n) {
+    if (n > 1) {
+      return n + sumTo1(n - 1);
+    }else {
+      return 1;
+    }
+  }
+
+  // arithmetic progression
+
+  function sumTo2(n) {
+    var a = 1 + n;
+    var b = a / 2;
+    return b * n;
+  }
+
+  // factorial
+
+  function factorial(n) {
+    if (n == 1) return n;
+    return n * factorial(n - 1);
+  }
+
+  // Fibonacci cicle
+
+  function fib(n) {
+  var a = 1,
+    b = 1;
+  for (var i = 3; i <= n; i++) {
+    var c = a + b;
+    a = b;
+    b = c;
+  }
+  return b;
+}
+
+// Fibonacci recursion
+
+function fib1(n) {
+  if (n <= 1) return n;
+  return fib1(n - 1) + fib1(n - 2);
+}
+
+  alert(fib1(6));
+</script>
