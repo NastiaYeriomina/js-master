@@ -1,0 +1,54 @@
+<script>
+  function Sum(){
+    var num1 = +prompt('Enter the first number', '');
+    var num2 = +prompt('Enter the second number', '');
+
+    alert(num1 + num2);
+  }
+
+  function getDecimal(num){
+    var integer = parseInt(num);
+    var result = num - integer;
+
+    num < 0 ? alert(-result.toFixed(10)) : alert(+result.toFixed(10));
+
+  }
+
+  function fibBinet(n){
+    var fi = (1 + Math.sqrt(5)) / 2;
+    var powFi = Math.pow(fi, n);
+    var a = powFi / Math.sqrt(5);
+
+    alert(parseInt(a));
+  }
+
+  function random(max){
+    var a = Math.random();
+    alert(a * max);
+  }
+
+  function random2(min, max){
+    var a = Math.random();
+    var residual = max - min;
+    var result = a * residual + min;
+    alert(result);
+  }
+
+  /* working but incorrect
+  function randomInteger(min, max){
+    var a = Math.random();
+    var residual = max - min;
+    var random = a * residual + min;
+
+    alert(Math.round(random));
+  }*/
+
+  //correct
+  function randomInteger(min, max) {
+    var rand = min + Math.random() * (max + 1 - min);
+        rand = Math.floor(rand);
+    return rand;
+  }
+
+  randomInteger(77, 79)
+</script>

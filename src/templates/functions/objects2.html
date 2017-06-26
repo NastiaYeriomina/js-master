@@ -1,0 +1,37 @@
+<script>
+function isEmpty(obj) {
+  var counter = 0;
+
+  for (var key in obj){
+    counter++
+  }
+
+  if(counter <= 0){
+    return true;
+  } else {
+    return false;
+  }
+}
+/*
+var smth = {
+  width: 200,
+  height: 100,
+  form: 'triangle'
+}; */
+
+function sum(obj){
+  var result = 0;
+  for(var key in obj){
+      result += obj[key];
+  }
+  return result;
+}
+
+var salaries = {
+  "Вася": 100,
+  "Петя": 300,
+  "Даша": 250
+};
+
+alert(sum(salaries))
+</script>

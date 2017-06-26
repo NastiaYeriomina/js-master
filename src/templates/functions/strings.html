@@ -1,0 +1,37 @@
+<script>
+  function ucFirst(str){
+    var first = str.charAt(0);
+    var uc = first.toUpperCase();
+    var last = str.substr(1);
+    return alert(uc + last);
+  }
+
+  function checkSpam(str){
+    var low = str.toLowerCase();
+    var viagra = low.indexOf('viagra');
+    var xxx = low.indexOf('xxx');
+
+    if (viagra > (-1) || xxx > (-1)){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function truncate(str, maxlength){
+    var strLength = str.length;
+    var cuted = str.slice(0, maxlength - 3);
+
+    if(strLength > maxlength){
+      return cuted + '...';
+    } else {
+      return str;
+    }
+  }
+
+  function extractCurrencyValue(str){
+    return +str.slice(1);
+  }
+
+  alert(extractCurrencyValue('$605'));
+</script>
