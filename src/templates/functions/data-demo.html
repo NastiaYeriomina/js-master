@@ -1,0 +1,47 @@
+<style>
+
+  .click {
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+    background-color: pink;
+    font-size: 30px;
+    text-align: center;
+  }
+  .click-another{
+    background-color: green;
+    margin-top: 30px;
+  }
+
+</style>
+
+
+
+  <div class='click' data-name='John' data-text='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error atque labore minus officiis ex quos culpa porro, officia architecto, perspiciatis rem nihil, minima veniam aut dolorem iste corporis eos rerum?'>Click me!</div>
+  <div class=' click click-another' data-name='Nill' data-text='Hello World!'>Click me!</div>
+  <div class='getter'>
+    <div id='setName' class="name"></div>
+    <div id='setText' class="text"></div>
+  </div>
+
+<script>
+
+  var btn = document.getElementsByClassName('click');
+  var nameContainer = document.getElementById('setName');
+  var textContainer = document.getElementById('setText');
+
+
+    for(var i = 0; i < btn.length; i++){
+      btn[i].onclick = function(){
+        var name = this.getAttribute('data-name');
+        var text = this.getAttribute('data-text');
+
+        nameContainer.innerHTML = name;
+        textContainer.innerHTML = text;
+
+      }
+
+    }
+
+
+</script>
