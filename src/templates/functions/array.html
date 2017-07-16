@@ -1,0 +1,149 @@
+<script>
+  function lastElem(arr){
+    var length = arr.length;
+    var elem = arr[length - 1];
+
+    alert(elem);
+  }
+
+  function push(arr){
+    arr.push('Computer');
+    alert(arr);
+  }
+
+  function push2(arr){
+    arr[arr.length] = 'computer';
+    alert(arr);
+  }
+
+  function operations(){
+    var styles = ['Джаз', 'Блюз'];
+    styles.push('Рок-н-Рол');
+    styles[styles.length - 2] = 'Классика';
+    var first = styles.shift();
+    styles.unshift('Рэп', 'Регги');
+    alert(styles);
+  }
+
+  function random(arr){
+    var rand = Math.floor(Math.random() * arr.length);
+    alert(arr[rand]);
+  }
+
+  function calculator(){
+    var array = [];
+    while(true){
+      var a = prompt('Enter a number', 0);
+
+      if(a === '' || a === null || isNaN(a)) break;
+
+      array.push(+a);
+    }
+    sum = 0;
+    for(var i = 0; i < array.length; i++){
+      sum += array[i];
+    }
+    alert(array);
+    alert(sum);
+  }
+
+  function find(arr, value){
+
+    outer: for(var i = 0; i < arr.length; i++){
+      var a = arr[i];
+
+      for(;a == value;){
+        return alert(i);
+
+        if(a != value || a == false) break outer;
+      }
+    }
+
+    return alert(-1);
+    /* можно использовать .indexOf */
+  }
+
+  //моя функция
+  function filterRange(arr, a, b){
+    var newArr = [];
+    for(var i = arr.indexOf(a); i <= arr.indexOf(b); i++){
+      // newArr[i] = arr[i];
+      newArr.push(arr[i]);
+    }
+    alert(newArr);
+  }
+
+  /*function filterRange(arr, a, b) {
+    var result = [];
+
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] >= a && arr[i] <= b) {
+        result.push(arr[i]);
+      }
+    }
+
+    return alert(result);
+  }*/
+
+  function Eratosfen(){
+    // шаг 1
+    var arr = [];
+    for (var i = 2; i < 100; i++) {
+      arr[i] = true;
+    }
+    // шаг 2
+    var p = 2;
+    do {
+      // шаг 3
+      for (i = 2 * p; i < 100; i += p) {
+        arr[i] = false;
+      }
+      // шаг 4
+      for (i = p + 1; i < 100; i++) {
+        if (arr[i]) break;
+      }
+      p = i;
+    } while (p * p < 100); // шаг 5
+    // шаг 6 (готово)
+    // посчитать сумму
+    var sum = 0;
+    for (i = 0; i < arr.length; i++) {
+      if (arr[i]) {
+        sum += i;
+      }
+    }
+    alert( sum );
+  }
+
+  // медленное решение
+  /*function getMaxSubSum(arr){
+    var maxSum = 0; // если вообще нет элементов, то сумма 0
+    // медленное решение
+    for(var i = 0; i < arr.length; i++){
+      var maxSumStart = 0;
+      for(var j = i; j < arr.length; j++){
+        maxSumStart += arr[j];
+        maxSum = Math.max(maxSum, maxSumStart);
+      }
+    }
+    console.log(maxSum);
+  }*/
+
+  // быстрое решение
+  function getMaxSubSum(arr){
+    var s = 0;
+    var maxSum = 0;
+    for(var i = 0; i < arr.length; i++){
+      s += arr[i];
+      maxSum = Math.max(maxSum, s);
+      if(s < 0){
+        s = 0;
+      }
+    }
+    console.log(maxSum);
+  }
+
+  var arr = [1, 2, 3, 4, 6, -100, 0];
+
+  getMaxSubSum(arr)
+</script>
