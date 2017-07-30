@@ -1,0 +1,24 @@
+<script>
+
+function map(arr){
+  var lengthArr = arr.map(function(elem){
+    return elem.length;
+  });
+  console.log(lengthArr);
+}
+
+function getSums(arr){
+  var result = [];
+  var suma = arr.reduce(function(sum, current){
+    result.push(sum);
+    return sum + current;
+  });
+  result.push(suma);
+  console.log(result);
+}
+
+var arr = ["Есть", "жизнь", "на", "Марсе"];
+var numbers = [ 1, 2, 3, 4, 5 ];
+
+getSums(numbers)
+</script>

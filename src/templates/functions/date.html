@@ -1,0 +1,103 @@
+<script>
+
+  function createDate(){
+    var d = new Date(2012, 1, 20, 3, 12);
+    console.log(d);
+  }
+
+  function getWeekDay(date){
+    var week = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];
+    var day = date.getDay();
+    for(var i = 0; i < week.length; i++){
+      var result = week[day];
+    }
+    console.log(result);
+    //alert( date.toLocaleString('ru', {weekday: 'short'}) ); можно одним методом
+  }
+
+  function getLocalDay(date){
+    var localDay = date.getDay();
+    if(localDay == 0) localDay = 7;
+    console.log(localDay);
+  }
+
+  function getDateAgo(date, days){
+    var d = new Date(date);
+    d.setDate(d.getDate() - days);
+    console.log(d);
+    console.log(date);
+  }
+
+  function getLastDayOfMonth(year, month){
+    var date = new Date(year, month + 1, 0);
+    var result = date.getDate();
+    console.log(result);
+  }
+
+  function getSecondsToday(){
+    var today = new Date();
+    today.setHours(0 , 0, 0, 0);
+    var result = (Date.now() - +today) / 1000;
+    console.log(result);
+  }
+
+  function getSecondsToTomorrow(){
+    var d = new Date;
+    d.setDate(d.getDate() + 1);
+    d.setHours(0, 0, 0, 0);
+    console.log(d);
+    var result = (+d - Date.now()) / 1000;
+    console.log(result);
+  }
+
+  function formatDate(date){
+    var day = date.getDate();
+    if(day < 10) day = '0' + day;
+
+    var month = date.getMonth() + 1;
+    if(month < 10) month = '0' + month;
+
+    var year = date.getFullYear().toString().slice(2);
+    if(year < 10) year = '0' + year;
+
+    var result = day + '.' + month + '.' + year;
+    console.log(result);
+  }
+
+  function relativeDate(date){
+    var dif = Date.now() - date;
+    if(dif < 1000) {
+      console.log('только что');
+    }
+
+    var sec = Math.floor(dif / 1000); // округлить diff до секунд
+    if (sec < 60) {
+      console.log(sec + ' сек. назад');
+    }
+
+    var min = Math.floor(dif / 60000); // округлить diff до минут
+    if (min < 60) {
+      console.log(min + ' мин. назад');
+    }
+
+    // форматировать дату, с учетом того, что месяцы начинаются с 0
+      var d = date;
+      d = [
+        '0' + d.getDate(),
+        '0' + (d.getMonth() + 1),
+        '' + d.getFullYear(),
+        '0' + d.getHours(),
+        '0' + d.getMinutes()
+      ];
+
+      for (var i = 0; i < d.length; i++) {
+        d[i] = d[i].slice(-2);
+      }
+
+      console.log(d.slice(0, 3).join('.') + ' ' + d.slice(3).join(':'));
+  }
+
+  var date = new Date(2017, 6, 28);
+
+  relativeDate(date);
+</script>

@@ -1,0 +1,229 @@
+<script>
+  function addClass(obj, cls){
+    var classes = obj.className;
+    var arr = classes.split(' ');
+
+    for(var i = 0; i < arr.length; i++){
+      if(arr[i] == cls) return console.log('this class already exists');
+    }
+    arr.push(cls);
+    obj.className = arr.join(' ');
+    console.log(obj);
+  }
+
+  function camelize(str){
+    var arr = str.split('-');
+
+    for(var i = 0; i < arr.length; i++){
+      var upper = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+      arr[i] = upper;
+    }
+    var result = arr.join('');
+    console.log(result);
+  }
+
+  function removeClass(obj, cls){
+    var classes = obj.className;
+    var arr = classes.split(' ');
+    for(var i = 0; i < arr.length; i++){
+      if(arr[i] == cls){
+        arr.splice(i, 1);
+        i--; //следущая итерация цикла заново проверяет элемент, потому что по номеру і теперь стоить новый
+      }
+    }
+    console.log(arr);
+    obj.className = arr.join(' ');
+    console.log(obj);
+  }
+
+  function filterRangeInPlace(arr, a, b){
+    for(var i = 0; i < arr.length; i++){
+      if(arr[i] < a || arr[i] > 5){
+        arr.splice(i, 1);
+        i--;
+      }
+    }
+    console.log(arr);
+  }
+
+  function sortReverse(arr){
+    function compareNumbers(a, b){
+      return a - b;
+    };
+    var sorted = arr.sort(compareNumbers);
+    var result = sorted.reverse();
+    console.log(result);
+  }
+
+  function copySort(arr){
+    var arrSorted = arr.concat();
+    console.log(arrSorted);
+    arrSorted.sort();
+    console.log(arrSorted);
+    console.log(arr);
+  }
+
+  function randomSort(arr){
+    function random(a, b){
+      return Math.random() - 0.5;
+    }
+    arr.sort(random);
+    console.log(arr);
+  }
+
+  function ageSort(arr){
+    function compareAge(a, b){
+      return a.age - b.age;
+    }
+    arr.sort(compareAge);
+    console.log(arr);
+    for(var i = 0; i < arr.length; i++){
+      console.log(arr[i].name);
+    }
+  }
+
+  // with cicle
+  function printList(obj){
+    var tmp = obj;
+
+    while (tmp) {
+      alert( tmp.value );
+      tmp = tmp.next;
+    }
+  }
+
+  //with recursion
+  function printList1(obj){
+    if(obj){
+      console.log(obj.value);
+      printList1(obj.next);
+    }
+  }
+
+  //with recursion
+  function printReverseList(obj){
+    if(obj.next){
+      printReverseList(obj.next);
+      console.log(obj.next);
+    }
+      console.log(obj.value);
+  }
+
+  //with cicle
+  function printReverseList1(obj){
+    var tmp = obj;
+    var arr = [];
+
+    while (tmp){
+      arr.push(tmp.value);
+      tmp = tmp.next;
+    }
+    arr.reverse();
+    for(var i = 0; i < arr.length; i++){
+      console.log(arr[i]);
+    }
+  }
+
+  /*function aclean(arr){
+    var result = [];
+    for(var i = 0; i < arr.length; i++){
+      var newArr = [arr[i].toUpperCase()];
+      var splited = newArr[0].split('');
+      var sorted = splited.sort();
+      var string = sorted.join('');
+      result.push(string);
+    }
+    var cleaned = [];
+    for(var j = 0; j < result.length; j++){
+      cleaned.push(result[j]);
+      for(var k = 0; k < (cleaned.length - 1); k++){
+        if(cleaned[k] == cleaned[cleaned.length - 1]){
+          cleaned.pop();
+        }
+      }
+    }
+    console.log(cleaned);
+  }*/
+
+  function aclean(arr){
+    var obj = {};
+    for(var i = 0; i < arr.length; i++){
+      var newArr = [arr[i].toUpperCase()];
+      var splited = newArr[0].split('');
+      var sorted = splited.sort();
+      var string = sorted.join('');
+
+      obj[string] = arr[i];
+    }
+    console.log(obj);
+    var result = [];
+    for(var key in obj){
+      result.push(obj[key]);
+    }
+    console.log(result);
+  }
+
+  //using cicle
+  function unique(arr){
+    var result = [];
+    for(var i = 0; i < arr.length; i++){
+      result.push(arr[i]);
+      for(var j = 0; j < (result.length - 1); j++){
+        if(result[j] == result[result.length - 1]){
+          result.pop();
+        }
+      }
+    }
+    console.log(result);
+  }
+
+  //using object
+  function unique1(arr){
+    var obj = {};
+    for(var i = 0; i < arr.length; i++){
+      var key = arr[i];
+      obj[key] = arr[i];
+    }
+    console.log(obj);
+    /*var result = [];
+    for(key in obj){
+      result.push(obj[key]);
+    }*/
+    var result = Object.keys(obj);
+    console.log(result);
+  }
+
+  var obj = {
+    className: 'open menu open'
+  };
+
+  var str = 'border-left-width';
+
+  var arr = [1, 2, 3, 4, 5, 6];
+
+  var vasya = { name: "Вася", age: 23 };
+  var masha = { name: "Маша", age: 18 };
+  var vovochka = { name: "Вовочка", age: 6 };
+
+  var people = [ vasya , masha , vovochka ];
+
+  var list = {
+    value: 1,
+    next: {
+      value: 2,
+      next: {
+        value: 3,
+        next: {
+          value: 4,
+          next: null
+        }
+      }
+    }
+  };
+
+  var anagrams = ["воз", "киборг", "корсет", "ЗОВ", "гробик", "костер", "сектор"];
+
+  var strings = ["кришна", "кришна", "харе", "харе", "харе", "харе", "кришна", "кришна", "8-()", "кришна", "8-()", "малышь"];
+
+  unique1(strings)
+</script>
