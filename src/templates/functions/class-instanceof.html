@@ -1,0 +1,62 @@
+<script>
+  function formatDate(date){
+      if(date.getTime){
+        var dd = date.getDate();
+        var mm = date.getMonth() + 1;
+        var yy = date.getFullYear().toString().slice(2);
+
+        if(dd < 10){
+          dd = '0' + dd;
+        }
+        if(mm < 10){
+          mm = '0' + mm;
+        }
+        var result = dd + '.' + mm + '.' + yy;
+        return result;
+      }
+      if(typeof date == 'string'){
+        var arr = date.split('-');
+
+        var dd = arr[2];
+        var mm = arr[1];
+        var yy = arr[0].slice(2);
+
+        var result = dd + '.' + mm + '.' + yy;
+        return result;
+      }
+      if(typeof date == 'number'){
+        // calculating seconds
+        /*var getYear = Math.floor(date / (1000 * 60 * 60 * 24 * 365));
+        var getMonth = Math.floor(((date / (1000 * 60 * 60 * 24 * 365)) - getYear) * 12);
+        var getDate = Math.floor((((date / (1000 * 60 * 60 * 24 * 365)) - getYear) * 12 - getMonth) * 31);
+        var yy = (1970 + getYear).toString().slice(2);
+        var mm = getMonth + 1;
+        var dd = getDate;
+        if(mm < 10) mm = '0' + mm;
+        if(dd < 10) dd = '0' + dd;*/
+
+        var newDate = new Date(date);
+        var dd = newDate.getDate();
+        var mm = newDate.getMonth() + 1;
+        var yy = newDate.getFullYear().toString().slice(2);
+        if(dd < 10) dd = '0' + dd;
+        if(mm < 10) mm = '0' + mm;
+
+        var result = dd + '.' + mm + '.' + yy;
+        return result;
+      }
+      if(Array.isArray(date)){
+        var dd = date[2];
+        var mm = date[1] + 1;
+        var yy = date[0].toString().slice(2);
+        if(dd < 10) dd = '0' + dd;
+        if(mm < 10) mm = '0' + mm;
+
+        var result = dd + '.' + mm + '.' + yy;
+        return result;
+      }
+
+  }
+
+  console.log(formatDate(1234567890))
+</script>

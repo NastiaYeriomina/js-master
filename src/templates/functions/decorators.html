@@ -1,0 +1,71 @@
+<script>
+  function logDecor1(){
+    function work(a){
+      console.log(a);
+    }
+
+    function makeLogging(f, log){
+      return function(a){
+        log.push(a);
+        return f.call(this, a);
+      }
+    }
+
+    var log = [];
+    work = makeLogging(work, log);
+
+    work(2);
+    work('smth');
+    work(true);
+
+    console.log(log);
+  }
+
+  function logDecorMul(){
+    function work(a, b){
+      console.log(a + b);
+    }
+
+    function makeLogging(f, log){
+      return function(){
+        log.push([].slice.call(arguments));
+        return f.apply(this, arguments);
+      }
+    }
+
+    var log = [];
+    work = makeLogging(work, log);
+
+    work(2, 1);
+    work(5, 1);
+    work(6, 1);
+
+
+    console.log(log);
+  }
+
+  function caching(){
+    function random(x){
+      return Math.random() * x;
+    }
+
+    function makeCaching(f){
+      var cache = {};
+      return function(x){
+          if(!(x in cache)){
+            cache[x] = f.call(this, x);
+          }
+          return cache[x];
+      }
+    }
+
+    random = makeCaching(random);
+    var a = random(5);
+    var b = random(5);
+    var c = random(4);
+
+    console.log(a == c);
+  }
+
+  caching()
+</script>

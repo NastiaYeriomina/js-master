@@ -1,0 +1,41 @@
+<script>
+
+function calculator(){
+  var calculator = {
+    read: function(){
+      this.a = +prompt('a');
+      this.b = +prompt('b');
+      console.log(this);
+    },
+    sum: function(){
+      console.log(this.a + this.b);
+    },
+    mul: function(){
+      console.log(this.a * this.b);
+    }
+  }
+  calculator.read();
+  calculator.sum();
+  calculator.mul()
+}
+
+function ladder(){
+  var ladder = {
+  step: 0,
+  up: function() { // вверх по лестнице
+    this.step++;
+    return this;
+  },
+  down: function() { // вниз по лестнице
+    this.step--;
+    return this;
+  },
+  showStep: function() { // вывести текущую ступеньку
+    alert( this.step );
+    return this;
+  }
+};
+ladder.up().up().showStep()
+}
+  ladder()
+</script>

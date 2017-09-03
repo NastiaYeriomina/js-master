@@ -1,0 +1,30 @@
+<script>
+function sumArgs(arr) {
+  //method borrowing
+  /*arguments.reduce = [].reduce;
+  return arguments.reduce(function(a, b){
+    return a + b;
+  });*/
+  //call
+  return [].reduce.call(arguments, function(a,b){
+    return a + b;
+  });
+
+};
+
+//this function is used in applyAll()
+function sum(){
+  return [].reduce.call(arguments, function(a, b){
+    return a + b;
+  })
+};
+
+function applyAll(){
+  var arr = [].slice.call(arguments);
+  var func = arr[0];
+  var args = arr.slice(1);;
+  return func.apply(null, args);
+};
+
+console.log(applyAll(sum, 1, 2, -3));
+</script>

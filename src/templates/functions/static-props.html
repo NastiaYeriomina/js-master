@@ -1,0 +1,32 @@
+<script>
+  var articles = [];
+  function Article(date){
+    this.created = date;
+    this.dates = articles.push(this.created);
+    Article.count++;
+    //Article.last = this.created;  можно запомнить дату в статическом свойстве, а не записывать в массив
+  };
+
+  Article.lastDate = function(){
+    return articles[articles.length - 1];
+  }
+
+  Article.formatedDate = function(){
+    return Article.lastDate().getDate() + '.' + (Article.lastDate().getMonth() + 1) + '.' + Article.lastDate().getFullYear();
+  }
+
+  Article.showStats = function(){
+    console.log(Article.count + ' articles were created');
+    console.log('the last article was created on ' + this.formatedDate());
+  };
+
+  Article.count = 0;
+
+  new Article(new Date(2015, 11, 15));
+  new Article(new Date(2005, 1, 5));
+  new Article(new Date(2013, 3, 1));
+  new Article(new Date(2017, 7, 23));
+
+  Article.showStats();
+
+</script>

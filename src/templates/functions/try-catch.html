@@ -1,0 +1,21 @@
+<script>
+  function calculator(){
+    try{
+      var result = eval(prompt('enter your expression', '4+'));
+      if(!(isNaN(result) || result == null)){
+        alert(result);
+      } else {
+        throw new Error('your expresson is uncorrect, enter another one please');
+      }
+    } catch(e){
+      if(e.message == 'your expresson is uncorrect, enter another one please'){
+        alert(e.message);
+      } else {
+        alert(e.message + '. Repeat your input.');
+      }
+      var repeat = eval(prompt('enter your expression', '4+'));
+      alert(repeat);
+    }
+  }
+  calculator()
+</script>

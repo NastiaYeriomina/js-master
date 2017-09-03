@@ -1,0 +1,54 @@
+<script>
+  function User(fullname){
+    var arr = fullname.split(' ');
+    this.fullName = fullname;
+    console.log(arr);
+    /*Object.defineProperties(this, {
+      firstName: {
+        get: function() {return this.firstName = arr[0];},
+        set: function(newFirstName) {this.fullName = newFirstName + ' ' + this.lastName;}
+      },
+
+      lastName: {
+        get: function() {return this.lastName = arr[1];},
+        set: function(newLastName) {this.fullName = this.firstName + ' ' + newLastName;}
+      }
+    });*/
+
+    Object.defineProperties(this, {
+
+    firstName: {
+      get: function() {return this.fullName.split(' ')[0];},
+      set: function(newFirst) {this.firstName = newFirst;}
+    },
+
+    lastName: {
+      get: function() {return this.fullName.split(' ')[1];},
+      set: function(newLast) {this.firstName = newLast;}
+    }
+
+  });
+    /*Object.defineProperty(this, 'firstName', {
+      get: function(){
+        return this.firstName = arr[0];
+      },
+      set: function(value){
+        this.firstName = value;
+      }
+    });
+    Object.defineProperty(this, 'lastName', {
+      get: function(){
+        return this.lastName = arr[1];
+      },
+      set: function(value){
+        this.lastName = value;
+      }
+    });*/
+
+  }
+
+  var ivan = new User('Ivan Petrov');
+  console.log(ivan.firstName);
+  ivan.lastName = 'Socolov';
+  console.log(ivan.fullName);
+</script>

@@ -1,0 +1,41 @@
+<script>
+  function toJson(){
+    var leader = {
+      name: "Василий Иванович",
+      age: 35
+    };
+
+    var json = JSON.stringify(leader);
+    console.log(json);
+
+    var parsed = JSON.parse(json);
+    console.log(parsed);
+  }
+
+  function jsonLink(){
+    var leader = {
+      name: "Василий Иванович"
+    };
+
+    var soldier = {
+      name: "Петька"
+    };
+
+    // эти объекты ссылаются друг на друга!
+    leader.soldier = soldier;
+    soldier.leader = leader;
+
+    var team = [leader, soldier];
+
+    var json = JSON.stringify(team, function(key, value){
+      if(key == 'soldier' || key == 'leader') return value.name;
+      return value;
+    });
+    console.log(leader.soldier);
+    console.log(soldier.leader);
+    console.log(json);
+    //чтобы сохранить ссылки обьектов друг на друга можно использовать фреймворк Dojo
+    //можно заменить ссылки на id, но там сложнее работать с документомa
+  }
+  jsonLink()
+</script>

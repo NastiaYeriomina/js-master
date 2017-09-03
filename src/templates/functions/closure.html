@@ -54,12 +54,31 @@
 
     var shooters = [];
 
-      var shooter = function() {
-        for(var i = 0; i < 10; i++){
-          alert( i );
-        }
+    for (var i = 0; i < 10; i++) {
+
+      var shooter = function me() {
+        console.log( me.i );
       };
+      shooter.i = i;
+
+      /*
+      var shooter = function(i){
+        return function(){
+        alert(i);
+      }
+      }(i)
+      */
+
+      /*
+      for(var i = 0; i < 10; i++)(function(i){
+        var shooter = function(){
+        alert(i);
+      }
+    })(i)
+      *?
+
       shooters.push(shooter);
+    }
 
     return shooters;
   }
@@ -67,7 +86,7 @@
   var army = makeArmy();
 
   army[0]();
-  army[5]();
+  army[6]();
 
   var arr = [1, 2, 3, 4, 5, 6, 7];
 

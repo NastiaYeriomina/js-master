@@ -1,0 +1,82 @@
+<script>
+
+  function newCalc(){
+    function Calculator(){
+      this.read = function(){
+        this.a = +prompt('a');
+        this.b = +prompt('b');
+      };
+      this.sum = function(){
+        var sum = this.a + this.b;
+        console.log(sum);
+      };
+      this.mul = function(){
+        var mul = this.a * this.b;
+        console.log(mul);
+      }
+      console.log(this);
+    }
+
+    var calc = new Calculator();
+    calc.read()
+    calc.sum()
+    calc.mul()
+  }
+
+  function newAccum(){
+    function Accumulator(startingValue){
+      this.value = startingValue;
+      this.read = function(){
+        this.value += +prompt('your value');
+      }
+    }
+
+    var acc = new Accumulator(1);
+    acc.read()
+    acc.read()
+    acc.read()
+    console.log('current sum is '+ acc.value)
+  }
+
+  function newPowercalc(){
+    function Calculator(){
+      var methods = {
+        '+': function(a, b){
+          return a + b;
+        },
+        '-': function(a, b){
+          return a - b;
+        }
+      };
+
+      this.calculate = function(){
+        var split = prompt('your string').split(' ');
+        a = +split[0];
+        op = split[1];
+        b = +split[2];
+
+        if(!methods[op] || isNaN(a) || isNaN(b)){
+          return 'Oooops!'
+        }
+
+        return methods[op](a, b);
+      };
+
+      this.addMethod = function(name, func){
+        return methods[name] = func;
+      };
+    }
+
+    var calc = new Calculator();
+
+
+    var powerCalc = new Calculator();
+    powerCalc.addMethod('*', function(a, b){
+      return a * b;
+    });
+    console.log(calc.calculate());
+  }
+
+  newPowercalc()
+
+</script>

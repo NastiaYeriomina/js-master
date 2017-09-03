@@ -1,0 +1,107 @@
+<script>
+function printNumbersInterval(){
+  var n = 1;
+  var timerId = setInterval(function(){
+    console.log(n);
+    if(n == 20) clearInterval(timerId);
+    n++;
+  }, 100);
+  /*setTimeout(function(){
+    clearInterval(timerId);
+  }, 2100);*/
+}
+
+function printNumbersRecursion(){
+  var i = 1;
+  var timerId = setTimeout(function recur(){
+    console.log(i);
+    //if(i < 20) setTimeout(recur, 100);
+    timerId = setTimeout(recur, 100);
+    if(i == 20) clearTimeout(timerId);
+    i++;
+  }, 100);
+}
+
+function delayWrap(){
+  function delay(f, ms){
+    return function(){
+      var saveThis = this;
+      var saveArgs = arguments;
+      setTimeout(function(){
+        f.apply(saveThis, saveArgs);
+      }, ms);
+    }
+  }
+
+  function f(x){
+    console.log(x);
+  }
+
+  var f500 = delay(f, 500);
+  f500('hello');
+}
+
+function debounceWrap(){
+  function debounce(f, ms){
+    var state = null;
+    var COOLDOWN = 1;
+    return function(){
+      if(state) return;
+      f.apply(this, arguments);
+      state = COOLDOWN;
+      setTimeout(function(){state = null}, ms);
+    }
+  }
+
+  function f(){
+    console.log(1);
+  }
+
+  var result = debounce(f, 1000);
+
+  result(1); // выполнится сразу же
+  result(2); // игнор
+
+  setTimeout( function() { result(3) }, 100); // игнор (прошло только 100 мс)
+  setTimeout( function() { result(4) }, 1100); // выполнится
+  setTimeout( function() { result(5) }, 1500); // игнор
+}
+
+function throttleWrap(){
+  function throttle(f, ms){
+    var isThrottled = false;
+    var saveThis;
+    var saveArgs;
+    function wrapper(){
+      if(isThrottled){
+        saveArgs = arguments;
+        saveThis = this;
+        return;
+      }
+      f.apply(this, arguments);
+      isThrottled = true;
+      setTimeout(function(){
+        isThrottled = false;
+        if(saveArgs){
+          wrapper.apply(saveThis, saveArgs);
+          saveArgs = saveThis = null;
+        }
+      }, ms)
+    }
+    return wrapper;
+  }
+
+  var f = function(a) {
+    console.log(a)
+  };
+
+  // затормозить функцию до одного раза в 1000 мс
+  var f1000 = throttle(f, 1000);
+
+  f1000(1); // выведет 1
+  f1000(2); // (тормозим, не прошло 1000 мс)
+  f1000(3); // (тормозим, не прошло 1000 мс)
+}
+
+throttleWrap()
+</script>
