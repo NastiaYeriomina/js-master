@@ -1,0 +1,85 @@
+<script>
+  (function(){
+    function User(){
+      var firstName;
+      var lastName;
+
+      this.setFirstName = function(name){
+        firstName = name;
+      }
+      this.setSurname = function(surname){
+        lastName = surname;
+      }
+      this.getFullName = function(){
+        return firstName + ' ' + lastName;
+      }
+    }
+
+    user1 = new User();
+    user1.setFirstName('Nastia');
+    user1.setSurname('Yeriomina');
+    console.log(user1.getFullName());
+  })();
+
+  (function(){
+    function CoffeeMachine(power, capacity) {
+      var waterAmount = 0;
+
+      var WATER_HEAT_CAPACITY = 4200;
+
+      function getTimeToBoil() {
+        return waterAmount * WATER_HEAT_CAPACITY * 80 / power;
+      }
+
+      this.setWaterAmount = function(amount) {
+        if (amount < 0) {
+          throw new Error("Значение должно быть положительным");
+        }
+        if (amount > capacity) {
+          throw new Error("Нельзя залить больше, чем " + capacity);
+        }
+
+        waterAmount = amount;
+      };
+
+      this.addWater = function(amount){
+        this.setWaterAmount(waterAmount + amount);
+        /*if(amount > capacity){
+          throw new Error("You can't add more then " + capacity);
+        }
+        if(amount < 0){
+          throw new Error("You should add water? don't take it");
+        }
+        waterAmount += amount;
+        if(waterAmount > capacity){
+          throw new Error("Your coffee machine s full of water");
+        }*/
+      };
+
+      function onReady() {
+        alert( 'Кофе готов!' );
+      };
+
+      this.run = function() {
+        setTimeout(onReady, getTimeToBoil());
+      };
+
+      this.getPower = function(){
+        return power;
+      };
+
+      this.getWaterAmount = function(){
+        return waterAmount;
+      };
+
+    }
+    var coffeeMachine = new CoffeeMachine(100000, 400);
+    coffeeMachine.addWater(200);
+    coffeeMachine.addWater(100);
+    coffeeMachine.addWater(500);
+    coffeeMachine.run();
+    console.log(coffeeMachine.getPower());
+    console.log(coffeeMachine.getWaterAmount());
+  })();
+
+</script>
