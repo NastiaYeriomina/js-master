@@ -1,0 +1,27 @@
+<script>
+  (function(){
+    Function.prototype.defer = function(ms){
+      setTimeout(this, ms);
+    }
+    function f() {
+      alert( "привет" );
+    }
+
+    f.defer(1000);
+  });
+  (function(){
+    Function.prototype.defer = function(ms){
+      var self = this;
+      return function(){
+        var args = arguments;
+        var context = this;
+        setTimeout(function(){self.apply(context, args)}, ms);
+      }
+    }
+    function f(a, b) {
+      alert( a + b );
+    }
+
+    f.defer(1000)(1, 2); // выведет 3 через 1 секунду.
+  })()
+</script>

@@ -56,12 +56,21 @@
         }*/
       };
 
-      function onReady() {
+
+      var ready = function onReady() {
         alert( 'Кофе готов!' );
       };
 
+      this.setOnReady = function(f){
+        ready = f;
+        //onReady = f;
+      };
+
+      this.isRunning = false;
+
       this.run = function() {
-        setTimeout(onReady, getTimeToBoil());
+        setTimeout(function(){ready()}, getTimeToBoil());
+        this.isRunning = true;
       };
 
       this.getPower = function(){
@@ -76,8 +85,9 @@
     var coffeeMachine = new CoffeeMachine(100000, 400);
     coffeeMachine.addWater(200);
     coffeeMachine.addWater(100);
-    coffeeMachine.addWater(500);
+    console.log(coffeeMachine.isRunning);
     coffeeMachine.run();
+    console.log(coffeeMachine.isRunning);
     console.log(coffeeMachine.getPower());
     console.log(coffeeMachine.getWaterAmount());
   })();
