@@ -1,0 +1,52 @@
+<script>
+function(){
+  delay = (ms) => {
+    let promise = new Promise((resolve, reject) =>
+      {setTimeout(resolve, ms)}
+    );
+    return promise;
+  }
+  doSomething = () => console.log("i'm doing something");
+
+  delay(1000)
+    .then(() => alert("Hello!"))
+    // .then(doSomething);
+  )
+}
+
+function(){
+  let users = [
+    'user.json',
+    'guest.json',
+    'admin.json'
+  ];
+  users.reduce((promise, user) => {
+    return promise.then(_ => console.log(user));
+  }, Promise.resolve());
+  /*Promise.resolve()
+    .then(_ => console.log(users[0]))
+    .then(_ => console.log(users[1]))
+    .then(_ => console.log(users[2]));*/
+
+  /*
+    // начало цепочки
+    let chain = Promise.resolve();
+
+    let results = [];
+
+    // в цикле добавляем задачи в цепочку
+    urls.forEach(function(url) {
+    chain = chain
+      .then(() => httpGet(url))
+      .then((result) => {
+        results.push(result);
+      });
+    });
+
+    // в конце — выводим результаты
+    chain.then(() => {
+    alert(results);
+    });
+  */
+}
+</script>

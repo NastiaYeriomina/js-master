@@ -1,0 +1,97 @@
+<div>Пользователи:</div>
+<ul>
+  <li>Маша</li>
+  <li>Вовочка</li>
+</ul>
+<table>
+  <tbody>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- комментарий -->
+
+<script>
+  function task1(){
+    function getHead(){
+      //return document.documentElement.children[0];
+      return document.head;
+    }
+    function getUl(){
+      return document.body.children[1];
+    }
+    function getLi(){
+      var parent = document.body.children[1];
+      return parent.children[1];
+    }
+    console.log(getLi());
+  }
+
+  function task2(){
+    function checkChildren(elem){
+      if(elem.childNodes.length == 0 /*!elem.firstChild*/){return 'i have no children'}
+      else {return elem.childNodes}
+    }
+    console.log(checkChildren(document.body.children[1].children[0]));
+  }
+
+  function task3(){
+    var table = document.body.children[2];
+    function setTextColor(){
+      var rows = table.rows;
+      for(var i = 0; i < rows.length; i++){
+        var cells = rows[i].cells;
+        for(var j = 0; j < cells.length; j++){
+          cells[j].innerHTML = (j + 1) + ':' + (i + 1);
+          cells[i].style.backgroundColor = 'red';
+        }
+      }
+    }
+    setTextColor()
+  }
+  task3()
+</script>
+
+<style>
+table{
+  border-collapse: collapse;
+}
+  td{
+    padding: 5px 10px;
+    border: 1px solid #000;
+  }
+</style>
