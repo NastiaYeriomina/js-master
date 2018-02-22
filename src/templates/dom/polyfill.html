@@ -1,0 +1,38 @@
+<div class="div"></div>
+
+<script>
+  Element.prototype.matches = function(){
+    if (!Element.prototype.matches) {
+    Element.prototype.matches = Element.prototype.matchesSelector ||
+      Element.prototype.webkitMatchesSelector ||
+      Element.prototype.mozMatchesSelector ||
+      Element.prototype.msMatchesSelector;
+    }
+  }
+
+  Element.prototype.closest = function (selector){
+    if (!Element.prototype.closest) {
+      var self = this;
+      while(self){
+        if(self.matches(selector)){
+          return self;
+        }
+        else{
+          self = self.parentElement;
+        }
+      }
+      return null;
+    }
+  }
+
+  if(document.documentElement.textContent === underfined){
+    Object.defineProperty(Element.prototype, 'textConten', { // (2)
+      get: function() {
+        return this.innerText;
+      },
+      set: function(value) {
+        this.innerText = value;
+      }
+    });
+  }
+</script>

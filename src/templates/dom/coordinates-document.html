@@ -1,0 +1,83 @@
+<style>
+  body{
+    height: 2000px;
+  }
+</style>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae
+    esse sequi officia sapiente.</p>
+
+
+  <blockquote>
+    - Что на завтрак, Бэрримор?
+    - Овсянка, сэр.
+    - А на обед?
+    - Овсянка, сэр.
+    - Ну а на ужин?
+    - Котлеты, сэр.
+    - Уррра!!!
+    - Из овсянки, сэр!!!
+  </blockquote>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae
+    esse sequi officia sapiente.</p>
+
+<script>
+  window.onload = function(){
+    function getDocumentScroll(){
+      var top = pageYOffset;
+      var bottom = top + document.documentElement.clientHeight;
+      var height = Math.max(
+        document.body.scrollHeight, document.documentElement.scrollHeight,
+        document.body.offsetHeight, document.documentElement.offsetHeight,
+        document.body.clientHeight, document.documentElement.clientHeight
+      );
+      return {
+        top: top,
+        bottom: bottom,
+        height: height
+      }
+    }
+
+    function showNote(anchor, position, html){
+      var note = document.createElement('div');
+      note.innerHTML = html;
+      note.className += ' note';
+      document.body.appendChild(note);
+      note.style.cssText = 'position: absolute; border: 1px solid #000; padding: 10px;';
+
+      var startCoords = anchor.getBoundingClientRect();
+      switch(position){
+        case('top-out'):
+          note.style.top = startCoords.top - note.offsetHeight + 'px';
+          note.style.left = startCoords.left + 'px';
+          break;
+        case('right-out'):
+          note.style.top = startCoords.top + 'px';
+          note.style.left = startCoords.left + anchor.offsetWidth + 'px';
+          break;
+        case('bottom-out'):
+          note.style.top = startCoords.top + anchor.offsetHeight + 'px';
+          note.style.left = startCoords.left + 'px';
+          break;
+        case('top-in'):
+          note.style.top = startCoords.top + 'px';
+          note.style.left = startCoords.left + 'px';
+          break;
+        case('right-in'):
+          note.style.top = startCoords.top + 'px';
+          note.style.left = startCoords.left + anchor.offsetWidth - note.offsetWidth + 'px';
+          break;
+        case('bottom-in'):
+          note.style.top = startCoords.top + anchor.offsetHeight - note.offsetHeight + 'px';
+          note.style.left = startCoords.left + 'px';
+          break;
+      }
+    }
+    var quote = document.getElementsByTagName('blockquote')[0];
+
+    showNote(quote, 'bottom-in', '<span>note</span>');
+    console.log(getDocumentScroll());
+  }
+
+</script>

@@ -1,0 +1,8 @@
+<div style='height: 1000px;'></div>
+<script>
+  Object.defineProperties(this, {pageYoffset: {
+      get: function() {return document.documentElement.scrollTop || document.body && document.body.scrollTop || 0;}
+    }
+  });
+  console.log(window.pageYoffset);
+</script>

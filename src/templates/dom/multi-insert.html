@@ -1,0 +1,62 @@
+<body>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+  </ul>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Отчество</th>
+        <th>Возраст</th>
+      </tr>
+      <tr>
+        <td>Петя</td>
+        <td>Иванов</td>
+        <td>Петрович</td>
+        <td>15</td>
+      </tr>
+      <tr>
+        <td>Вася</td>
+        <td>Петров</td>
+        <td>Александрович</td>
+        <td>10</td>
+      </tr>
+      <tr>
+        <td>Владимир</td>
+        <td>Ленин</td>
+        <td>Ильич</td>
+        <td>9</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    //insert new li
+    (function(){
+      var parent = document.getElementsByTagName('ul')[0];
+      parent.insertAdjacentHTML(`beforeEnd`, '<li>3</li><li>4</li><li>5</li>');
+    })();
+
+    //sort table
+    (function(){
+      var table = document.getElementsByTagName('table')[0];
+      var tbody = table.getElementsByTagName('tbody')[0];
+      var th = table.getElementsByTagName('th')[0];
+      var members = table.getElementsByTagName('tr');
+      var arr = [];
+      for(var i = members.length - 1; i >= 1; i--){
+        var row = tbody.removeChild(members[i]);
+        arr.push(row);
+      }
+      arr.sort(function(a,b){
+        return a.lastElementChild.innerHTML - b.lastElementChild.innerHTML;
+      });
+      for(var i = 0; i < arr.length; i++){
+        tbody.appendChild(arr[i]);
+      }
+    })();
+  </script>
+</body>

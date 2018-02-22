@@ -1,0 +1,36 @@
+<body>
+  <style>
+    .external {
+      background-color: yellow;
+    }
+  </style>
+  <a name="list">список</a>
+  <ul>
+    <li><a href="http://google.com">http://google.com</a></li>
+    <li><a href="/tutorial">/tutorial.html</a></li>
+    <li><a href="local/path">local/path</a></li>
+    <li><a href="ftp://ftp.com/my.zip">ftp://ftp.com/my.zip</a></li>
+    <li><a href="http://nodejs.org">http://nodejs.org</a></li>
+    <li><a href="http://internal.com/test">http://internal.com/test</a></li>
+  </ul>
+  <div id="widget" data-widget-name="menu">Выберите жанр</div>
+  <script>
+    (function(){
+      var div = document.getElementById('widget');
+      var data = div.dataset.widgetName;
+      console.log(data);
+    });
+    (function(){
+      var a = document.getElementsByTagName('a');
+      for(var i = 0; i < a.length; i++){
+        var address = a[i].getAttribute('href');
+        if(address !== null){
+          if(address.indexOf('://') !== -1 && address.indexOf('http://internal.com') == -1){
+            a[i].classList.add('external');
+          }
+        }
+      }
+
+    })();
+  </script>
+</body>

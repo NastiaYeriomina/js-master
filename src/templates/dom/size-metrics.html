@@ -1,0 +1,126 @@
+<style>
+  p{
+    width: 200px;
+    height: 300px;
+    overflow-y: auto;
+  }
+
+  #moving-div {
+    border: 5px groove green;
+    padding: 5px;
+    margin: 10px;
+    background-color: yellow;
+  }
+
+  #field {
+      width: 200px;
+      border: 10px groove black;
+      background-color: #00FF00;
+      position: relative;
+    }
+
+    #ball {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+    }
+    #elem {
+      width: 200px;
+      height: 150px;
+      background-color: red;
+      padding: 20px;
+      overflow: auto;
+    }
+
+    body {
+      border: 1px solid black;
+    }
+</style>
+
+Before Before Before
+
+<div id="moving-div">
+Text Text Text<br>
+Text Text Text<br>
+</div>
+
+After After After
+<p id="paragraph">
+  Свойство elem.scrollTop содержит размер прокрученной области при отсчете сверху. А как подсчитать размер прокрутки снизу?
+
+Напишите соответствующее выражение для произвольного элемента elem.
+
+Проверьте: если прокрутки нет вообще или элемент полностью прокручен – оно должно давать ноль.
+  В этой главе мы считали, что страница находится в режиме соответствия стандартам. В режиме совместимости – некоторые старые браузеры требуют document.body вместо documentElement, в остальном всё так же. Конечно, по возможности, стоит использовать только режим соответствия стандарту.
+</p>
+
+<div id="field">
+    <img src="https://js.cx/clipart/ball.svg" id="ball"> . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+</div>
+
+<div id="elem">
+    текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+    текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+    текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст текст
+    текст текст
+  </div>
+<script>
+  function scrollBottom(el){
+    var scroll = el.scrollHeight - el.scrollTop - el.clientWidth;
+    return scroll;
+  }
+
+  function scrollbarWidth(){
+    var div = document.createElement('div');
+    div.style.cssText = 'overflow: scroll; \
+                  width: 100px; \
+                  height: 100px; \
+                  position: absolute; \
+                  transform: translate(-100%, -100%); \
+                  top: 0; \
+                  left: 0;';
+    document.body.appendChild(div);
+    var scroll = div.offsetWidth - div.clientWidth;
+    document.body.removeChild(div);
+    return scroll;
+  }
+
+  function copyDivSize(){
+    //code from task
+    var div = document.getElementById('moving-div');
+    div.style.position = 'absolute';
+    div.style.right = div.style.top = 0;
+    //my code
+    var newDiv = document.createElement('div');
+    newDiv.style.height = div.scrollHeight;
+    newDiv.style.margin = div.offsetTop;
+    div.insertAdjacentElement('afterEnd', newDiv);
+  }
+
+  function centerBall(){
+    var field = document.getElementById('field');
+    var ball = document.getElementById('ball');
+
+    var top = (field.clientHeight - ball.offsetHeight) / 2;
+    var left = (field.clientWidth - ball.offsetWidth) / 2;
+
+    ball.style.top = top;
+    ball.style.left = left;
+  }
+
+  function fullWidth(){
+    var el = document.getElementById('elem');
+
+    var scrollWidth = el.offsetWidth - el.clientWidth;
+    var parentWidth = el.offsetParent.clientWidth;
+
+    el.style.width = parentWidth - scrollWidth - +getComputedStyle(el).paddingRight.slice(0,getComputedStyle(el).paddingRight.length - 2) - +getComputedStyle(el).paddingLeft.slice(0,getComputedStyle(el).paddingLeft.length - 2);
+  }
+
+  console.log(scrollBottom(paragraph));
+  console.log(scrollbarWidth());
+  copyDivSize();
+  centerBall();
+  fullWidth();
+</script>

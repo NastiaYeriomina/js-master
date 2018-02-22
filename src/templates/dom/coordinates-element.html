@@ -1,0 +1,102 @@
+<style>
+  body {
+    padding: 20px 0 0 20px;
+    cursor: pointer;
+  }
+
+  #field {
+    overflow: hidden;
+    width: 200px;
+    height: 150px;
+    border-top: 10px solid black;
+    border-right: 10px solid gray;
+    border-bottom: 10px solid gray;
+    border-left: 10px solid black;
+    background-color: #00FF00;
+    font: 10px/1.2 monospace;
+  }
+
+  .triangle-right {
+    position: relative;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 20px solid red;
+    text-indent: -20px;
+    font: 12px/1 monospace;
+  }
+</style>
+
+<div id="field">
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+</div>
+
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae
+    esse sequi officia sapiente.</p>
+
+
+  <blockquote>
+    - Что на завтрак, Бэрримор?
+    - Овсянка, сэр.
+    - А на обед?
+    - Овсянка, сэр.
+    - Ну а на ужин?
+    - Котлеты, сэр.
+    - Уррра!!!
+    - Из овсянки, сэр!!!
+  </blockquote>
+
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sint atque dolorum fuga ad incidunt voluptatum error fugiat animi amet! Odio temporibus nulla id unde quaerat dignissimos enim nisi rem provident molestias sit tempore omnis recusandae
+    esse sequi officia sapiente.</p>
+<script>
+  function getCoord(){
+    var el = document.getElementById('field');
+    var coords = el.getBoundingClientRect();
+
+    //coords of left top outer corner
+    var leftOuter = coords.left;
+    var topOuter = coords.top;
+    //coords of left top inner corner
+    var leftInner = leftOuter + el.clientLeft;
+    var topInner = topOuter + el.clientTop;
+    //coords of right bottom outer corner
+    var rightOuter = coords.right;
+    var bottomOuter = coords.bottom;
+    //coords of right bottom inner corner
+    var rightInner = leftInner + el.clientWidth;
+    var bottomInner = topInner + el.clientHeight;
+
+    return 'Left top outer:' + leftOuter + ':' + topOuter + ';' + 'Left top inner:' + leftInner + ':' + topInner + ';' + 'Right bottom outer:' + rightOuter + ':' + bottomOuter + ';' + 'Right bottom inner:' + rightInner + ':' + bottomInner + ';'
+  }
+
+  function showNote(anchor, position, html){
+    var note = document.createElement('div');
+    note.innerHTML = html;
+    note.className += ' note';
+    document.body.appendChild(note);
+    note.style.cssText = 'position: absolute; border: 1px solid #000; padding: 10px;';
+
+    var startCoords = anchor.getBoundingClientRect();
+    switch(position){
+      case('top'):
+        note.style.top = startCoords.top - note.offsetHeight + 'px';
+        note.style.left = startCoords.left + 'px';
+        break;
+      case('right'):
+        note.style.top = startCoords.top + 'px';
+        note.style.right = startCoords.left + anchor.offsetWidth + 'px';
+        break;
+      case('bottom'):
+        note.style.bottom = startCoords.top + anchor.offsetHeight + 'px';
+        note.style.left = startCoords.left + 'px';
+        break;
+    }
+
+  }
+  var quote = document.getElementsByTagName('blockquote')[0];
+
+  showNote(quote, 'top', '<span>note</span>');
+  console.log(getCoord());
+</script>
